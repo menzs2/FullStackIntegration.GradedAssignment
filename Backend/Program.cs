@@ -5,17 +5,24 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.AllowAnyOrigin()// Replace with your frontend URL
+        policy.AllowAnyOrigin() // Replace with your frontend URL
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
 });
 
+// Configure JSON serialization to use PascalCase globally
+builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = null; // Use PascalCase
+});
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
+
 app.UseHttpsRedirection();
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -23,17 +30,25 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 
-app.UseCors(); // Enable CORS
+app.UseCors();
 
 app.MapControllers();
 
 app.MapGet("/api/products", () =>
 {
-    return new[]
+    return new Product[]
     {
-        new { Id = 1, Name = "Laptop", Price = 1200.50, Stock = 25 },
-        new { Id = 2, Name = "Headphones", Price = 50.00, Stock = 100 }
+        new() { Id = 1, Name = "Laptop", Price = 1200.50, Stock = 25 },
+        new() { Id = 2, Name = "Headphones", Price = 50.00, Stock = 100 }
     };
 });
 
 app.Run();
+
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public double Price { get; set; }
+    public int Stock { get; set; }
+}
