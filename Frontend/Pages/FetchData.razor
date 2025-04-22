@@ -26,11 +26,8 @@
         {
             var response = await Httpclient.GetAsync("https://localhost:5083/api/products");
             response.EnsureSuccessStatusCode();
-            
             var json = await response.Content.ReadAsStringAsync();
-            Console.WriteLine(json);
             products = JsonSerializer.Deserialize<Product[]>(json);
-            Console.WriteLine(products[0].Name);    
         }
         catch (Exception ex)
         {
@@ -44,5 +41,12 @@
         public string Name { get; set; }
         public double Price { get; set; }
         public int Stock { get; set; }
+        public Category Category {get; set; }
+    }
+
+    public class Category
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
