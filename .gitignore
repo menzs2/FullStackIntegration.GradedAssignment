@@ -52,3 +52,29 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# MSBuild
+*.tlog
+
+# C++ Build
+*.ipch
+*.obj
+
+# Debugging and Cache
+*.cache
+*.pdb
+
+# Publish
+publish/
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Logs
+*.log
