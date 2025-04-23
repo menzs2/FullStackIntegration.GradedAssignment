@@ -40,9 +40,9 @@ app.UseCors();
 
 app.MapControllers();
 
-app.MapGet("/api/products", () =>
+app.MapGet("/api/products", (ProductService productService) =>
 {
-    productService.GetProducts(); // Use the ProductService to get products (Suggested by GitHub Copilot)
+    return productService.GetProducts(); // Use the ProductService to get products
 });
 
 app.Run();
