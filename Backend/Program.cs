@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -20,7 +22,7 @@ builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(options =
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.Addsingleton<ProductService>(); // Register ProductService as a singleton (Suggested by GitHub Copilot)
+builder.Services.AddSingleton<ProductService>(); // Register ProductService as a singleton (Suggested by GitHub Copilot)
 
 var app = builder.Build();
 
